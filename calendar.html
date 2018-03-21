@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Eckerd College Events</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--icon stylesheet-->
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar.css">
+	<link rel="stylesheet" href="stylesheet-fc.css">
+	<script src="fullcalendar/lib/jquery.min.js"></script>
+	<script src="fullcalendar/lib/moment.min.js"></script>
+	<script src="fullcalendar/fullcalendar.js"></script>
+	<script type='text/javascript' src='fullcalendar/gcal.js'></script>
+	<!-- THIS IS THE CALENDAR, MUST BE RENDERED IN <HEAD> -->
+	<script>
+		$(document).ready(function() {
+			var eventList = $('#event-list');
+			var events;
+			$('#calendar').fullCalendar({
+				googleCalendarApiKey: 'AIzaSyCyUy6X1M0d03Fd1ODq4HqiW0db0_sw4FQ',
+				events: {
+					googleCalendarId: 'eckerd.edu_59rbttfrjuspmscom7efkalj90@group.calendar.google.com',
+					color: '#00B6C2',
+					textColor: 'black'
+				},
+				header: {
+					left:   '',
+    			center: 'title',
+    			right:  'prev,next'
+				},
+				fixedWeekCount: false,
+				eventAfterAllRender: function(view) {
+          document.getElementById("footer-container").style.display = "block"; //makes footer not be dumb
+				}
+			});
+		});
+	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="overflow-y: scroll;">
+	<!-- HEADER -->
+	<header>
+		<div class="wrapper"> <!--has to have a separate class otherwise the nested div inherits 'width: 70%'-->
+			<div class="search-container"> <!--div that should be the size of the searchbar, use this div to float it right-->
+				<form>
+					<input type="text" placeholder="Search...">
+				</form>
+			</div>
+			<a href="https://www.youtube.com/user/eckerdcollegeflorida" class="social fa fa-youtube-play"></a>
+			<a href="https://www.snapchat.com/add/ecpalmetto" class="social fa fa-snapchat-ghost"></a>
+			<a href="https://www.instagram.com/ecpalmetto/?hl=en" class="social fa fa-instagram"></a>
+			<a href="https://twitter.com/ECPalmetto" class="social fa fa-twitter"></a>
+			<a href="https://www.facebook.com/ecpalmetto/" class="social fa fa-facebook"></a>
+		</div>
+	</header>
+	<!-- NAVBAR -->
+	<nav>
+		<div id="nav-container">
+			<a href="index.html">
+				<img src="images/logo.png" class="logo no-select">
+			</a>
+			<ul class="navbar">
+				<li><a href="index.html">HOME</a></li>
+				<li class="dropdown active-page"><a style="cursor: pointer;">EVENTS</a>
+					<ul class="dropdown-content">
+						<li class="active-drop"><a href="calendar.html">Calender</a></li>
+						<li><a href="events.html">Past Events</a></li>
+						<li><a href="#">Submit Event</a></li>
+					</ul>
+				</li>
+				<li><a href="staff.html">STAFF</a></li>
+				<li><a href="http://www.eckerdtritons.com/">ATHLETICS</a></li>
+				<li><a href="https://www.eckerd.edu/">ECKERD.EDU</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- CONTENT -->
+	<div id="content">
+		<div id="calendar"></div>
+	</div>
+	<!-- FOOTER -->
+  <footer>
+		<div id="footer-container" style="display: none;">
+			<img src="images/palmettologo.png" class="no-select">
+			<img src="images/eclogo.png" id="eclogo" class="no-select">
+			<p>St. Petersburg, Florida 33711<br><u>800.456.9009</u> or <u>727.867.1166</u></p>
+		</div>
+	</footer>
+	<script src="scripts.js"></script>
+</body>
+</html>

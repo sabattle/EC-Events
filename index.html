@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Eckerd College Events</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--icon stylesheet-->
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar.css">
+	<link rel="stylesheet" href="stylesheet-fc.css">
+	<script src="fullcalendar/lib/jquery.min.js"></script>
+	<script src="fullcalendar/lib/moment.min.js"></script>
+	<script src="fullcalendar/fullcalendar.js"></script>
+	<script type='text/javascript' src='fullcalendar/gcal.js'></script>
+	<!-- CALENDAR MUST BE RENDERED IN ORDER TO GET THE LIST -->
+	<!-- IT IS HIDDEN LATER ON IN THE CODE WITH INLINE STYLE="DISPLAY: NONE;" ON THE DIV -->
+	<script>
+		$(document).ready(function() {
+			var eventList = $('#event-list');
+			var events;
+			$('#calendar').fullCalendar({
+				googleCalendarApiKey: 'AIzaSyCyUy6X1M0d03Fd1ODq4HqiW0db0_sw4FQ',
+				events: {
+					googleCalendarId: 'eckerd.edu_59rbttfrjuspmscom7efkalj90@group.calendar.google.com',
+					color: '#00B6C2',
+					textColor: 'black'
+				},
+				header: {
+					left:   '',
+    			center: 'title',
+    			right:  'prev,next'
+				},
+				fixedWeekCount: false,
+				eventOrder: "start",
+				eventAfterAllRender: function(view) {
+					var events = $('#calendar').fullCalendar('clientEvents');
+					generateList(events);
+					//console.log(events.length);
+				}
+			});
+			function generateList(events) {
+				events.sort(function(a, b){return a.start- b.start}); //sort events by day
+				eventList.html('');
+				var ul = $('<ul/>');
+				var d = new Date();
+				var month = d.getMonth();
+				for (var i = 0; i < events.length; i++) {
+					var eventMonth = events[i].start.format('M') - 1; //get month of event, 0 = january
+					if (month == eventMonth) { //only display events from current month
+						var li = $('<li/>');
+						li.text(events[i].title + " on "  + events[i].start.format('M/D'));
+						ul.append(li);
+					}
+				}
+				eventList.html(ul);
+			}
+		});
+	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- HEADER -->
+	<header>
+		<div class="wrapper"> <!--has to have a separate class otherwise the nested div inherits 'width: 70%'-->
+			<div class="social-container">
+				<a href="https://www.youtube.com/user/eckerdcollegeflorida" class="social fa fa-youtube-play"></a>
+				<a href="https://www.snapchat.com/add/ecpalmetto" class="social fa fa-snapchat-ghost"></a>
+				<a href="https://www.instagram.com/ecpalmetto/?hl=en" class="social fa fa-instagram"></a>
+				<a href="https://twitter.com/ECPalmetto" class="social fa fa-twitter"></a>
+				<a href="https://www.facebook.com/ecpalmetto/" class="social fa fa-facebook"></a>
+			</div>
+		</div>
+	</header>
+	<!-- NAVBAR -->
+	<nav>
+		<div id="nav-container">
+			<a href="index.html">
+				<img src="images/logo.png" class="logo no-select">
+			</a>
+			<ul class="navbar">
+				<li class="active-page"><a href="index.html">HOME</a></li>
+				<li class="dropdown"><a style="cursor: pointer;">EVENTS</a>
+						<ul class="dropdown-content">
+							<li><a href="calendar.html">Calender</a></li>
+							<li><a href="events.html">Past Events</a></li>
+							<li><a href="#">Submit Event</a></li>
+						</ul>
+				</li>
+				<li><a href="staff.html">STAFF</a></li>
+				<li><a href="http://www.eckerdtritons.com/">ATHLETICS</a></li>
+				<li><a href="https://www.eckerd.edu/">ECKERD.EDU</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- SLIDESHOW -->
+	<div id="slideshow-container">
+			<img src="images/homeimg1.jpg" class="slide no-select">
+			<img src="images/homeimg2.jpg" class="slide fade no-select" style="display: none;">
+			<img src="images/homeimg3.jpg" class="slide fade no-select" style="display: none;">
+			<a class="prev no-select" onclick="changeSlide(-1)">&#10094;</a>
+			<a class="next no-select" onclick="changeSlide(1)">&#10095;</a>
+			<div class="dot-container no-select">
+			  <span class="dot active-dot" onclick="changeSlide(0, 'dot')"></span>
+			  <span class="dot" onclick="changeSlide(1, 'dot')"></span>
+				<span class="dot" onclick="changeSlide(2, 'dot')"></span>
+			</div>
+			<div class="text-container">
+			  <p id="slide-title">COLOR RUN: 2017</p>
+			</div>
+	</div>
+	<!-- CONTENT -->
+	<div id="content">
+		<img src="images/banner.png" id ="banner" class="no-select">
+		<div id='event-list'>Loading...</div>
+		<div id="calendar" style="display: none;"></div>
+		<button id="calendar-button"><a href="calendar.html">Calendar</a></button>
+	</div>
+	<!-- FOOTER -->
+	<footer>
+		<div id="footer-container">
+			<img src="images/palmettologo.png" class="no-select">
+			<img src="images/eclogo.png" id="eclogo" class="no-select">
+			<p>St. Petersburg, Florida 33711<br><u>800.456.9009</u> or <u>727.867.1166</u></p>
+		</div>
+	</footer>
+	<script src="scripts.js"></script>
+</body>
+</html>

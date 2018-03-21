@@ -1,0 +1,30 @@
+#calendar h2 {
+  display: block;
+  font-size: 24px;
+  font-weight: 100;
+  position: relative;
+  left: 58px;
+  letter-spacing: 3px;
+  padding-top: 4px;
+  text-transform: uppercase;
+}
+.fc-state-default {
+  background-color: #FFFFFF;
+  background-image: none;
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  border: none;
+  text-shadow: none;
+  box-shadow: none;
+}
+.fc-icon {
+  font-size: 24px;
+}
+.fc button {
+  background: none;
+}
+.fc button:hover {
+  transform: scale(1.8);
+}
+.fc button:focus {
+  outline: none;
+}
